@@ -1,17 +1,15 @@
-import 'bulma/css/bulma.min.css';
-import { Heading, Columns  } from 'react-bulma-components'
+import style from './Header.module.css';
+import { Link } from 'react-router-dom';
 
 const Header =()=>{
 
     return(
-        <Columns>
-            <Columns.Column>
-                <Heading>The Winter Store</Heading>
-            </Columns.Column>
-            <Columns.Column>
-                <Heading subtitle>Buy all youre christmas and new years items here</Heading>
-            </Columns.Column>
-        </Columns>
+        <Link to='/' className={style.link}>
+            <header className ={style.header} >      
+                <h1>Vinterbutiken</h1>
+                <p>Ett stort utval av krimskrams för jul och nyår</p>
+            </header>
+        </Link>
     )
 }
 

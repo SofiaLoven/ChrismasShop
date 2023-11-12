@@ -9,15 +9,14 @@ const path = './data/mock-data.json';
 const app = express()
 
 app.use(cors());
-//app.use('/api/products', products);
 
 //Hämtar alla producter
 app.get('/api/products/list', (req, res)=>{
     fs.readFile(path, 'utf8', (err, data)=>{
         if(err){
-            res.status(404).json({sucess: false, message: 'Failed to find youre products'});
+            res.status(404).json({statusCode: 404, sucess: false, message: 'Failed to find youre products', data: {}});
         }else{
-            res.status(200).json({sucess: true, message: 'Products', data: JSON.parse(data)});
+            res.status(200).json({statusCode: 200, sucess: true, message: 'Products', data: JSON.parse(data)});
         }
     })
 
@@ -38,33 +37,9 @@ app.get('/api/products/:id', async (req, res)=>{
         }
     
         if(err){
-            res.status(404).json({sucess: false, message: 'Failed to find a product with that id.'});
+            res.status(404).json({statusCode:404, sucess: false, message: 'Failed to find a product with that id.', data: {}});
         }else{
-            res.status(200).json({sucess: true, message: `Product with the id: ${id}`, data: product});
-        }
-
-    });
-
-})
-
-//Hämtar sökta produkter
-app.get('/api/products/search/:query', async (req, res)=>{
-    const query = req.params.query;
-    let product = {};
-    fs.readFile(path, 'utf8', (err, data)=>{
-        if (data.length > 0) {
-          const allProducts = JSON.parse(data);
-          product = {
-            ...allProducts.products.filter((product) => product.produkt.toLowerCase().includes(query.toLowerCase())),
-          };
-        }else{
-            throw err; 
-        }
-    
-        if(err){
-            res.status(404).json({sucess: false, message: 'Failed to find any product in that search.'});
-        }else{
-            res.status(200).json({sucess: true, message: `All products that includes ${query}`, data: product});
+            res.status(200).json({statusCode: 200, sucess: true, message: `Product with the id: ${id}`, data: product});
         }
 
     });

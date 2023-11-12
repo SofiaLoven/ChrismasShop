@@ -1,16 +1,17 @@
-import { Columns } from "react-bulma-components"
 import { ProductList } from "../features/products/ProductList"
-import 'bulma/css/bulma.min.css'
+import { useOutletContext } from "react-router-dom"
+import '../assets/css/website.css'
+import style from './Home.module.css'
+import { IProduct } from "../models/IProduct"
 
 
 export const Home =()=>{
+    const products:IProduct[] = useOutletContext();
 
     return(
-        <Columns>
-            <h2 className="Heading">Products</h2>
-            <Columns.Column>
-                < ProductList />
-            </Columns.Column>
-        </Columns>
+        <div className={style.homePage}>
+            <h2>Produkter</h2>
+            < ProductList products = {products}/>
+        </div>    
     )
 }
