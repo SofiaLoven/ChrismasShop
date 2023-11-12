@@ -1,4 +1,3 @@
-import { IProduct } from "../../models/IProduct"
 import { Link } from "react-router-dom"
 import testPicture from '../../assets/images/testBild.jpg'
 import style from './Product.module.css'
@@ -12,11 +11,11 @@ type ProductProps ={
 }
 
 
-export const Product =({ id, produkt, pris, beskrivning, lagerSaldo }: ProductProps)=>{
+export const Product =({ id, produkt, pris }: ProductProps)=>{
     
 
     return(
-        <Link to={`/products/${id}`} state={{beskrivning, lagerSaldo, produkt, pris}} className={style.link}>
+        <Link to={`/products/${id}`} className={style.link}>
             <div key={id} className={style.card}>
                     <img src={testPicture} alt={produkt} />
                     <div>
